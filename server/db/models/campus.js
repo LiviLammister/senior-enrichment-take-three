@@ -9,14 +9,17 @@ const Campus = db.define('campus', {
         validate: {
             notEmpty: true,
         },
-        imageUrl: {
-            type: Sequelize.STRING,
-            defaultValue: './images/image-not-found.png',
-        },
-        description: {
-            type: Sequelize.TEXT
-        }
+    },
+    imageUrl: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: './images/image-not-found.png',
+    },
+    description: {
+        type: Sequelize.TEXT,
+        allowNull: false,
     }
+
 })
 
 module.exports = Campus;
