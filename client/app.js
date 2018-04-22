@@ -2,15 +2,19 @@ import React     from 'react';
 import { Route } from 'react-router-dom';
 
 import {
-  AllCampuses,
-  Navbar
+  CampusList,
+  Home,
+  Navbar,
+  StudentList
 } from './components';
 
 const App = () => {
   return (
     <div>
       <Navbar />
-      <Route exact path='/campuses' component={AllCampuses} />
+      <Route exact path='/'         component={Home} />
+      <Route exact path='/campuses' component={CampusList} />
+      <Route exact path='/students' component={StudentList} />
     </div>
   )
 }

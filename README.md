@@ -1,127 +1,98 @@
-# Boilermaker
+# Senior Enrichment Project
 
-*Good things come in pairs*
+Make a thing!
 
-Looking to mix up a backend with express/sequelize and a frontend with react/redux? That's `boilermaker`!
+## Getting started
 
-Follow along with the workshop to make your own! This canonical version can serve as a reference, or a starting point all on its own.
+1. Fork and clone this repo
+2. `npm install`
+3. Check out the mock-view in the `wireframes` folder
+4. Start the build process and your application with: `npm run start:dev`
+5. If you navigate to the URL you should see some UI already :) [We already have some connection code to get you started]
 
-## Setup
+## Requirements
 
-To use this boilerplate, you'll need to take the following steps:
+### The Premise
 
-* Don't fork or clone this repo! Instead, create a new, empty directory on your machine and `git init` (or create an empty repo on Github and clone it to your local machine)
-* Run the following commands:
+You are the CTO of the Margaret Hamilton Interplanetary Academy of JavaScript. Create a RESTful web platform that allows you to manage your students and campuses. Before getting started, please carefully review the expectations as outlined in the [grading rubric](https://docs.google.com/document/d/1X5FekpyZqAiTmSU0ipAAHTGyIoInC-m-1a75YkMcejM).
+
+### The tools
+
+Use at least Sequelize, Express and React when creating this app. This app is small, so just using React is reasonable, but note that without practicing with more frontend libraries you will have a steep learning curve in senior phase. If you are going forward with ***just React*** you will benefit from **deleting all references to React-Redux, Redux and React-Router** (so you don't confuse yourself with trying to use something in half your files and not the other half). 
+
+If you feel ready, start by incorporating React-Router, Redux and React-Redux (we helped get you started with this!)! If you go this route, it will be great practice and will prepare you **well** for senior phase.
+
+### Views and Functionality
+
+Take a look in the wireframes folder as a reference for how your front-end could look. Of course, you are encouraged to be creative and flex your own design muscles, but the wireframes should function as a good baseline/inspirational resource.
+
+Once again, please carefully review the user story expectations in the [rubric](https://docs.google.com/document/d/1X5FekpyZqAiTmSU0ipAAHTGyIoInC-m-1a75YkMcejM), as completing the user stories is the most heavily weighted part of the project.
+
+### Routes
 
 ```
-git remote add boilermaker https://github.com/FullstackAcademy/boilermaker.git
-git fetch boilermaker
-git merge boilermaker/master
+GET
+- all campuses
+- a campus by id
+- all students
+- a student by id
 ```
 
-Why did we do that? Because every once in a while, `boilermaker` may be updated with additional features or bug fixes, and you can easily get those changes from now on by entering:
+```
+POST
+- new campus
+- new student
+```
 
 ```
-git fetch boilermaker
-git merge boilermaker/master
+PUT
+- updated student info for one student
+- updated campus info for one campus
 ```
 
-## Customize
+```
+DELETE
+- a campus
+- a student
+```
 
-Now that you've got the code, follow these steps to get acclimated:
+### DB Design
 
-* Update project name and description in `package.json` and `.travis.yml` files
-* `npm install`, or `yarn install` - whatever you're into
-* Create two postgres databases: `boilermaker` and `boilermaker-test` (you can substitute these with the name of your own application - just be sure to go through and change the `package.json` and `.travis.yml` to refer to the new name)
-  * By default, running `npm test` will use `boilermaker-test`, while regular development uses `boilermaker`
-* Create a file called `secrets.js` in the project root
-  * This file is `.gitignore`'d, and will *only* be required in your *development* environment
-  * Its purpose is to attach the secret env variables that you'll use while developing
-  * However, it's **very** important that you **not** push it to Github! Otherwise, *prying eyes* will find your secret API keys!
-  * It might look like this:
+- Students
+  * have profile info including:
+    * firstName - not empty or null
+    * lastName - not empty or null
+    * email - not empty or null; valid email
+    * gpa - decimal between 0.0 and 4.0
+  * must have a virtual 'name' field which is the concatenation of firstName and lastName
+  * must be assigned to a campus
 
-  ```
-    process.env.GOOGLE_CLIENT_ID = 'hush hush'
-    process.env.GOOGLE_CLIENT_SECRET = 'pretty secret'
-    process.env.GOOGLE_CALLBACK = '/auth/google/callback'
-  ```
+- Campuses
+  * have profile info including:
+    * name - not empty or null
+    * imageUrl - default value
+    * description - extremely large text
+  * can have many students assigned (may have none)
 
-* To use OAuth with Google, complete the step above with a real client ID and client secret from Google
-  * You can get them here: https://console.developers.google.com/apis/credentials
-* Finally, complete the section below to set up your linter
+### How to test functionality without a frontend
+- GET: use your browser
+- POST / PUT / DELETE : 
+ - CLI (command line interface) with `curl`
+   - e.g. `curl -H "Content-Type: application/json" -X POST -d '{"username":"kate","password":"1234"}' http://localhost:3000/api/login`
+   - `-H`: headers. `-X`: verb. `-d`: data (must be of the type specified in headers). http://[address]:[port]/[route_path]
+ - [Postman](https://www.getpostman.com/)
+   ![](https://www.dropbox.com/s/4fk3b90cd0i1a5y/postman_post.png?raw=true)
+- Databases: use Sequelize in your routes and see if you are receiving what you expect
 
-## Linting
+### Video Walkthrough
+Please submit a 5 to 10 minute screencast of a walk-through of the functionality *and code* for each user story in your app. E.g. for "As a user, I can create a campus", please show us that you can successfully create a campus in your app, and also the actual code that is involved in doing that (from the front-end components to the backend routes and models). We recommend using Quicktime to record the screencast (instructions on how to do that [here](https://support.apple.com/kb/PH5882?locale=en_US&viewlocale=en_US)).
 
-Linters are fundamental to any project - they ensure that your code has a consistent style, which is critical to writing readable code.
+Once you've recorded your screencast, please *upload it to YouTube as an unlisted video*. Email `academics@fullstackacademy.com` with the title `Senior Enrichment Submission: [Your Name]` and include your repo link and YouTube recording link. This will aid us in evaluating your submission.
 
-Boilermaker comes with a working linter (ESLint, with `eslint-config-fullstack`) "out of the box." However, everyone has their own style, so we recommend that you and your team work out yours and stick to it. Any linter rule that you object to can be "turned off" in `.eslintrc.json`. You may also choose an entirely different config if you don't like ours:
+## Evaluation
+[Rubric](https://docs.google.com/document/d/1X5FekpyZqAiTmSU0ipAAHTGyIoInC-m-1a75YkMcejM)
 
-* [Standard style guide](https://standardjs.com/)
-* [Airbnb style guide](https://github.com/airbnb/javascript)
-* [Google style guide](https://google.github.io/styleguide/jsguide.html)
+- User stories (60%)
+- Rubric score (40%)
+- Extra credit (15% max)
 
-## Start
-
-`npm run start-dev` will make great things happen!
-
-If you want to run the server and/or webpack separately, you can also `npm run start-server` and `npm run build-client`.
-
-From there, just follow your bliss.
-
-## Deployment
-
-Ready to go world wide? Here's a guide to deployment! There are two (compatible) ways to deploy:
-
-* automatically, via continuous integration
-* manually, from your local machine
-
-Either way, you'll need to set up your deployment server to start:
-
-### Prep
-1. Set up the [Heroku command line tools](https://devcenter.heroku.com/articles/heroku-cli)
-2. `heroku login`
-3. Add a git remote for heroku:
-  - **If you're creating a new app...**
-    1. `heroku create` or `heroku create your-app-name` if you have a name in mind.
-    2. `heroku addons:create heroku-postgresql:hobby-dev` to add ("provision") a postgres database to your heroku dyno
-
-  - **If you already have a Heroku app...**
-    1.  `heroku git:remote your-app-name` You'll need to be a collaborator on the app.
-
-### When you're ready to deploy
-
-#### Option A: Automatic Deployment via Continuous Integration
-
-(_**NOTE**: This step assumes that you already have Travis-CI testing your code._)
-
-CI is not about testing per se – it's about _continuously integrating_ your changes into the live application, instead of periodically _releasing_ new versions. CI tools can not only test your code, but then automatically deploy your app. Boilermaker comes with a `.travis.yml` configuration almost ready for deployment; follow these steps to complete the job.
-
-1. Run `git checkout master && git pull && git checkout -b f/travis-deploy` (or use some other new branch name).
-2. Un-comment the bottom part of `.travis.yml` (the `before_deploy` and `deploy` sections)
-3. Add your Heroku app name to `deploy.app`, where it says "YOUR HEROKU APP NAME HERE". For example, if your domain is `cool-salty-conifer.herokuapp.com`, your app name is `cool-salty-conifer`.
-4. Install the Travis CLI tools by following [the instructions here](https://github.com/travis-ci/travis.rb#installation).
-5. Run `travis encrypt $(heroku auth:token) --org` to encrypt your Heroku API key. _**Warning:** do not run the `--add` command suggested by Travis, that will rewrite part of our existing config!_
-6. Copy-paste your encrypted API key into the `.travis.yml` file under `deploy.api_key.secure`, where it says "YOUR ENCRYPTED API KEY HERE".
-7. `git add -A && git commit -m 'travis: activate deployment' && git push -u origin f/travis-deploy`
-8. Make a PR for the new branch, get it approved, and merge it into master.
-
-That's it! From now on, whenever `master` is updated on GitHub, Travis will automatically push the app to Heroku for you.
-
-#### Option B: Manual Deployment from your Local Machine
-
-Some developers may prefer to control deployment rather than rely on automation. Your local copy of the application can be pushed up to Heroku at will, using Boilermaker's handy deployment script:
-
-1. Make sure that all your work is fully committed and pushed to your master branch on Github.
-2. If you currently have an existing branch called "deploy", delete it now (`git branch -d deploy`). We're going to use a dummy branch with the name "deploy" (see below), so if you have one lying around, the script below will error
-3. `npm run deploy` - this will cause the following commands to happen in order:
-  - `git checkout -b deploy`: checks out a new branch called "deploy". Note that the name "deploy" here isn't magical, but it needs to match the name of the branch we specify when we push to our heroku remote.
-  - `webpack -p`: webpack will run in "production mode"
-  - `git add -f public/bundle.js public/bundle.js.map`: "force" add the otherwise gitignored build files
-  - `git commit --allow-empty -m 'Deploying'`: create a commit, even if nothing changed
-  - `git push --force heroku deploy:master`: push your local "deploy" branch to the "master" branch on heroku
-  - `git checkout master`: return to your master branch
-  - `git branch -D deploy`: remove the deploy branch
-
-Now, you should be deployed!
-
-Why do all of these steps? The big reason is because we don't want our production server to be cluttered up with dev dependencies like webpack, but at the same time we don't want our development git-tracking to be cluttered with production build files like bundle.js! By doing these steps, we make sure our development and production environments both stay nice and clean!

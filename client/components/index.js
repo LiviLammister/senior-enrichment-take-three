@@ -4,10 +4,19 @@
  * having to figure out which file they belong to!
  */
 
-export {default as Navbar} from './navbar'
-export {default as UserHome} from './user-home'
 
 /** 
  * Campus Components
  */
-export {default as AllCampuses} from './campus/all-campuses'
+export {default as CampusList} from './campus/campus-list';
+
+/**
+ * Student Components
+ */
+export {default as StudentList} from './student/student-list';
+
+/**
+ * Other Components
+ */
+export {default as Home}   from './home';
+export {default as Navbar} from './navbar';
