@@ -12,12 +12,10 @@ const Campus = db.define('campus', {
     },
     imageUrl: {
         type: Sequelize.STRING,
-        allowNull: false,
-        defaultValue: './images/image-not-found.png',
+        defaultValue: '/img/image-not-found.png',
     },
     description: {
         type: Sequelize.TEXT,
-        allowNull: false,
     }
 
 })

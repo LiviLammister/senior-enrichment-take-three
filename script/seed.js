@@ -43,57 +43,57 @@ function generateCampuses() {
   const campuses = [
     Campus.build({
       name: 'Deathstar',
-      imageUrl: './space-station.png',
+      imageUrl: '/img/space-station.png',
       description: 'That\'s no Moon campus...'
     }),
     Campus.build({
       name: 'Europa',
-      imageUrl: './europa.png',
+      imageUrl: '/img/europa.png',
       description: 'Our Europa-pean campus.',
     }),
     Campus.build({
       name: 'Jupiter',
-      imageUrl: './jupiter.png',
+      imageUrl: '/img/jupiter.png',
       description: 'Our biggest campus.',
     }),
     Campus.build({
       name: 'Mars',
-      imageUrl: './mars.png',
+      imageUrl: '/img/mars.png',
       description: 'Apparently men are from here...',
     }),
     Campus.build({
       name: 'Mercury',
-      imageUrl: './mercury.png',
+      imageUrl: '/img/mercury.png',
       description: 'Former home of our dermatology school.',
     }),
     Campus.build({
       name: 'Moon',
-      imageUrl: './moon.png',
+      imageUrl: '/img/moon.png',
       description: 'Home of the MHIAJ School of Caseiculture and Tyromancy.',
     }),
     Campus.build({
       name: 'Neptune',
-      imageUrl: './neptune.png',
+      imageUrl: '/img/neptune.png',
       description: 'Trident and true.',
     }),
     Campus.build({
       name: 'Earth',
-      imageUrl: './planet-earth.png',
+      imageUrl: '/img/planet-earth.png',
       description: 'The only campus with running water.',
     }),
     Campus.build({
       name: 'Saturn',
-      imageUrl: './saturn.png',
+      imageUrl: '/img/saturn.png',
       description: 'Widely considered our most beautiful campus.',
     }),
     Campus.build({
       name: 'Uranus',
-      imageUrl: './uranus.png',
-      description: 'The "butt" of most campus jokes',
+      imageUrl: '/img/uranus.png',
+      description: 'The "butt" of most campus jokes.',
     }),
     Campus.build({
       name: 'Venus',
-      imageUrl: './venus.png',
+      imageUrl: '/img/venus.png',
       description: 'Apparently women are from here...'
     }),
   ];
