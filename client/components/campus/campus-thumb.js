@@ -5,7 +5,7 @@ import {
 
 const CampusThumb = () => (
     <Item>
-        Header
+        <Item.Header>Test</Item.Header>
     </Item>
 )
 

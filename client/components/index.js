@@ -8,7 +8,8 @@
 /** 
  * Campus Components
  */
-export {default as CampusList} from './campus/campus-list';
+export {default as CampusList}  from './campus/campus-list';
+export {default as CampusThumb} from './campus/campus-thumb';
 
 /**
  * Student Components

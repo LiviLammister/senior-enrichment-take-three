@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { 
+import {
     Container,
     Header
 } from 'semantic-ui-react';
 
-class CampusList extends Component {
-    render() {
-        return (
-            <Container text textAlign="center">
-                <Header as='h1'>All Campuses</Header>
-                {/* <List.item> */}
-            </Container>
-        );
-    }
+import { CampusThumb } from '../index'
+
+const CampusList = () => {
+    return (
+        <Container text textAlign="center">
+            <Header as='h1'>All Campuses</Header>
+            <CampusThumb />
+        </Container>
+    );
 }
 
 export default CampusList;
