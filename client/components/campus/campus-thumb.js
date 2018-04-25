@@ -3,10 +3,20 @@ import {
     Item,
 } from 'semantic-ui-react';
 
-const CampusThumb = () => (
-    <Item>
-        <Item.Header>Test</Item.Header>
-    </Item>
-)
+const CampusThumb = (props) => {
+    const campus = props.campus;
+    return (
+        <Item>
+            <Item.Image
+                size="tiny"
+                src={campus.imageUrl}
+            />
+            <Item.Header>{campus.name}</Item.Header>
+
+        </Item>
+    )
+}
+
+
 
 export default CampusThumb;

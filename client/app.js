@@ -1,6 +1,6 @@
-import React       from 'react';
-import { connect } from 'react-redux'
-import { Route }   from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect }          from 'react-redux'
+import { Route }            from 'react-router-dom';
 
 import {
   CampusList,
@@ -8,25 +8,37 @@ import {
   Navbar,
   StudentList
 } from './components';
-import { fetchCampuses } from './store';
 
-const App = () => {
-  return (
-    <div>
-      <Navbar />
-      <Route exact path='/'         component={Home} />
-      <Route exact path='/campuses' component={CampusList} />
-      <Route exact path='/students' component={StudentList} />
-    </div>
-  )
+import { 
+  fetchCampuses,
+  fetchStudents,
+ } from './store';
+
+class App extends Component {
+
+  componentDidMount() {
+    this.props.fetchInitialData()
+  }
+
+  render() {
+    return (
+      <div>
+        <Navbar />
+        <Route exact path='/'         component={Home} />
+        <Route exact path='/campuses' component={CampusList} />
+        <Route exact path='/students' component={StudentList} />
+      </div>
+    )
+  }
 }
-
-export default App;
 
 const mapState = null;
 
 const mapDispatch = dispatch => ({
   fetchInitialData: () => {
-    dispatch(fetchCampuses)
+    dispatch(fetchCampuses())
+    dispatch(fetchStudents())
   }
 })
+
+export default connect(mapState, mapDispatch)(App);
