@@ -11,28 +11,28 @@ const UPDATE = 'UPDATE_CAMPUS';
 /**
  * ACTION CREATORS
  */
-const init   = campus => ({type: INIT,   campus});
-const create = campus => ({type: CREATE, campus});
-const remove = id     => ({type: REMOVE, id});
-const update = campus => ({type: UPDATE. campus})
+const init   = campuses => ({type: INIT,   campuses});
+const create = campus   => ({type: CREATE, campus});
+const remove = id       => ({type: REMOVE, id});
+const update = campus   => ({type: UPDATE, campus})
 
 /**
  * REDUCER
  */
-export default function reducer(campus = [], action) {
+export default function reducer(campuses = [], action) {
     switch(action.type) {
         case INIT:
-            return action.campus;
+            return action.campuses;
         case CREATE:
-            return [action.campus, ...campus];
+            return [action.campus, ...campuses];
         case REMOVE:
-            return campus.filter(campus => campus.id !== action.id);
+            return campuses.filter(campus => campus.id !== action.id);
         case UPDATE:
-            return campus.map(campus => (
+            return campuses.map(campus => (
                 action.campus.id === campus.id ? action.campus : campus
             ));
         default:
-            return campus;
+            return campuses;
     }
 }
 
@@ -40,24 +40,24 @@ export default function reducer(campus = [], action) {
  * THUNK CREATORS
  */
 export const fetchCampuses = () => dispatch => {
-    axios.get('/api/campus')
+    axios.get('/api/campuses')
         .then(res => dispatch(init(res.data)));
 };
 
 export const removeCampus = id => dispatch => {
-    axios.delete(`/api/campus/${id}`)
+    axios.delete(`/api/campuses/${id}`)
         .then(() => dispatch(remove(id)))
-        .catch(err => console.error(`Removing studeht: ${id} unsuccesful`, err));
+        .catch(err => console.error(`Removing campus: ${id} unsuccesful`, err));
 };
 
 export const addCampus = campus => dispatch => {
-    axios.post('api/campus', campus)
+    axios.post('api/campuses', campus)
         .then(res => dispatch(create(res.data)))
-        .catch(res => console.error(`Creating student: ${id} unsuccesful`, err));
+        .catch(res => console.error(`Creating campus: ${id} unsuccesful`, err));
 };
 
 export const updateCampus = (id, campus) => {
-    axios.put(`/api/campus/${id}`, campus)
+    axios.put(`/api/campuses/${id}`, campus)
         .then(res => dispatch(update(res.data)))
-        .catch(err => console.error(`Updating student: ${id} unsuccesful`, err));
+        .catch(err => console.error(`Updating campus: ${id} unsuccesful`, err));
 };

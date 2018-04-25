@@ -1,5 +1,6 @@
-import React     from 'react';
-import { Route } from 'react-router-dom';
+import React       from 'react';
+import { connect } from 'react-redux'
+import { Route }   from 'react-router-dom';
 
 import {
   CampusList,
@@ -7,6 +8,7 @@ import {
   Navbar,
   StudentList
 } from './components';
+import { fetchCampuses } from './store';
 
 const App = () => {
   return (
@@ -20,3 +22,11 @@ const App = () => {
 }
 
 export default App;
+
+const mapState = null;
+
+const mapDispatch = dispatch => ({
+  fetchInitialData: () => {
+    dispatch(fetchCampuses)
+  }
+})
