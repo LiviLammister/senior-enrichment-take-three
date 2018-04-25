@@ -11,8 +11,10 @@ const CampusThumb = (props) => {
                 size="tiny"
                 src={campus.imageUrl}
             />
-            <Item.Header>{campus.name}</Item.Header>
-
+            <Item.Content>
+                <Item.Header>{campus.name}</Item.Header>
+                <Item.Description>{campus.description}</Item.Description>
+            </Item.Content>
         </Item>
     )
 }

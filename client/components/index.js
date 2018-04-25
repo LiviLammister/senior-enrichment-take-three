@@ -8,6 +8,7 @@
 /** 
  * Campus Components
  */
+export {default as CampusById}  from './campus/campus-by-id';
 export {default as CampusList}  from './campus/campus-list';
 export {default as CampusThumb} from './campus/campus-thumb';
 

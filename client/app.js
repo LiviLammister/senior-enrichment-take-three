@@ -3,6 +3,7 @@ import { connect }          from 'react-redux'
 import { Route }            from 'react-router-dom';
 
 import {
+  CampusById,
   CampusList,
   Home,
   Navbar,
@@ -17,18 +18,19 @@ import {
 class App extends Component {
 
   componentDidMount() {
-    this.props.fetchInitialData()
+    this.props.fetchInitialData();
   }
 
   render() {
     return (
       <div>
         <Navbar />
-        <Route exact path='/'         component={Home} />
-        <Route exact path='/campuses' component={CampusList} />
-        <Route exact path='/students' component={StudentList} />
+        <Route exact path='/'             component={Home} />
+        <Route exact path='/campuses'     component={CampusList} />
+        <Route exact path='/campuses/:id' component={CampusById} />
+        <Route exact path='/students'     component={StudentList} />
       </div>
-    )
+    );
   }
 }
 
@@ -36,8 +38,8 @@ const mapState = null;
 
 const mapDispatch = dispatch => ({
   fetchInitialData: () => {
-    dispatch(fetchCampuses())
-    dispatch(fetchStudents())
+    dispatch(fetchCampuses());
+    dispatch(fetchStudents());
   }
 })
 
