@@ -15,8 +15,9 @@ export {default as CampusThumb} from './campus/campus-thumb';
 /**
  * Student Components
  */
-export {default as StudentList}  from './student/student-list';
-export {default as StudentThumb} from './student/student-thumb';
+export {default as NewStudentForm} from './student/new-student-form';
+export {default as StudentList}    from './student/student-list';
+export {default as StudentThumb}   from './student/student-thumb';
 
 /**
  * Other Components

@@ -1,13 +1,18 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import {
+    Button,
     Container,
     Card,
     Divider,
     Header,
+    Modal,
 } from 'semantic-ui-react';
 
-import { StudentThumb } from '../index';
+import { 
+    NewStudentForm,
+    StudentThumb,
+} from '../index';
 import store, { getStudents } from '../store';
 
 export default class StudentList extends Component {
@@ -34,11 +39,12 @@ export default class StudentList extends Component {
         return (
             <div>
                 <Container>
-                    <Header
-                        as='h1'
-                        textAlign="center">
+                    <Header as='h1'>
                         All Students
-                </Header>
+                    <Modal trigger={<Button floated="right">Add Student</Button>}>
+                        <NewStudentForm />
+                    </Modal>
+                    </Header>
                     <Divider />
                 </Container>
                 <Card.Group>
