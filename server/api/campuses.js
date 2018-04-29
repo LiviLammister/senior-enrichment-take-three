@@ -20,14 +20,14 @@ router.param('id', (req, res, next, id) => {
   });
   
   router.post('/', (req, res, next) => {
-    User.create(req.body)
+    Campus.create(req.body)
       .then(campus => res.status(201).json(campus))
       .catch(next);
   });
   
   router.get('/:id', (req, res, next) => {
-    req.requestedUser.reload(User.options.scopes.populated())
-      .then(requestedCampus => res.json(requestedCampus))
+    Campus.findById(req.params.id)
+      .then(campus => res.json(campus))
       .catch(next);
   });
   

@@ -26,8 +26,8 @@ router.post('/', (req, res, next) => {
 })
 
 router.get('/:id', (req, res, next) => {
-    req.requestedStudent.reload(User.options.scopes.populated())
-        .then(requestedStudent => res.json(requestedStudent))
+    Student.findById(req.params.id)
+        .then(student => res.json(student))
         .catch(next);
 });
 
@@ -38,7 +38,7 @@ router.put('/:id', (req, res, next) => {
 });
 
 router.delete('/:id', (req, res, next) => {
-    req.requestedStudent.destroy()
+    req.student.destroy()
         .then(() => res.sendStatus(204))
         .catch(next);
 });

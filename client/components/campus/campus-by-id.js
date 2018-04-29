@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const CampusById = () => {
-    return (
-        <h1>SINGLE CAMPUS</h1>
-    );
+export default class CampusById extends Component {
+    render() {
+        return (
+            <h1>CAMPUS BY ID PAGE</h1>
+        );
+    } 
 }
-
-export default CampusById;

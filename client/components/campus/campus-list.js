@@ -1,5 +1,5 @@
+import axios               from 'axios';
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import {
     Container,
     Divider,
@@ -7,35 +7,49 @@ import {
     Header,
 } from 'semantic-ui-react';
 
-import { CampusThumb } from '../index'
+import { CampusThumb } from '../index';
+import store, { getCampuses } from '../store';
 
-const CampusList = (props) => {
-    const campuses = props.campuses;
-    return (
-        <Container text>
-            <Header
-                as='h1'
-                textAlign="center">
-                All Campuses
-            </Header>
-            <Divider />
-            <Item.Group divided>
-                {campuses.map(campus =>
-                    <CampusThumb
-                        key={campus.id}
-                        campus={campus}
-                    />)}
-            </Item.Group>
-        </Container>
-    );
-}
+export default class CampusList extends Component {
 
-
-const mapStateToProps = (state) => {
-    const newProps = {
-        campuses: state.campuses
+    constructor() {
+        super();
+        this.state = store.getState();
     }
-    return newProps
+
+    componentDidMount () {
+        this.unsubscribe = store.subscribe(() => {this.setState(store.getState())});
+        axios.get('/api/campuses')
+            .then(res => res.data)
+            .then(campuses => {store.dispatch(getCampuses(campuses))});
+    }
+
+    componentWillUnmount () {
+        this.unsubscribe();
+    }
+
+    render() {
+        const campuses = this.state.campuses;
+        if (!campuses) return <div />
+        return (
+            <Container text>
+                <Header
+                    as='h1'
+                    textAlign="center">
+                    All Campuses
+                </Header>
+                <Divider />
+                <Item.Group divided>
+                    {campuses.map(campus =>
+                        <CampusThumb
+                            key={campus.id}
+                            campus={campus}
+                        />)}
+                </Item.Group>
+            </Container>
+        );
+    }
 }
 
-export default connect(mapStateToProps)(CampusList);
+
+

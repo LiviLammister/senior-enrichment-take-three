@@ -1,4 +1,5 @@
-import React from 'react';
+import React    from 'react';
+import { Link } from 'react-router-dom';
 import {
     Item,
 } from 'semantic-ui-react';
@@ -8,6 +9,7 @@ const CampusThumb = (props) => {
     return (
         <Item>
             <Item.Image
+                as={Link} to={`/campuses/${campus.id}`}
                 size="tiny"
                 src={campus.imageUrl}
             />
@@ -16,9 +18,7 @@ const CampusThumb = (props) => {
                 <Item.Description>{campus.description}</Item.Description>
             </Item.Content>
         </Item>
-    )
+    );
 }
-
-
 
 export default CampusThumb;
