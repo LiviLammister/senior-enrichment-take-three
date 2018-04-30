@@ -1,6 +1,7 @@
 import axios               from 'axios';
 import React, { Component } from 'react';
 import {
+    Button,
     Container,
     Divider,
     Item,
@@ -33,10 +34,12 @@ export default class CampusList extends Component {
         if (!campuses) return <div />
         return (
             <Container text>
-                <Header
-                    as='h1'
-                    textAlign="center">
+                <Header as='h1'>
                     All Campuses
+                    <Button
+                        content="Add Campus"
+                        floated="right"
+                    />
                 </Header>
                 <Divider />
                 <Item.Group divided>

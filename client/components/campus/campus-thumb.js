@@ -10,6 +10,7 @@ const CampusThumb = (props) => {
         <Item>
             <Item.Image
                 as={Link} to={`/campuses/${campus.id}`}
+                campus={campus}
                 size="tiny"
                 src={campus.imageUrl}
             />

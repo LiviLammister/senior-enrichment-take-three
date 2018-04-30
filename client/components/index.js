@@ -8,14 +8,13 @@
 /** 
  * Campus Components
  */
-export {default as CampusById}  from './campus/campus-by-id';
+export {default as Campus}      from './campus/campus';
 export {default as CampusList}  from './campus/campus-list';
 export {default as CampusThumb} from './campus/campus-thumb';
 
 /**
  * Student Components
  */
-export {default as NewStudentForm} from './student/new-student-form';
 export {default as StudentList}    from './student/student-list';
 export {default as StudentThumb}   from './student/student-thumb';
 

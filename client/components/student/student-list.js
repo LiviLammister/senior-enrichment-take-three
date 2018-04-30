@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios                from 'axios';
 import React, { Component } from 'react';
 import {
     Button,
@@ -6,13 +6,12 @@ import {
     Card,
     Divider,
     Header,
-    Modal,
 } from 'semantic-ui-react';
 
-import { 
-    NewStudentForm,
+import {
     StudentThumb,
 } from '../index';
+
 import store, { getStudents } from '../store';
 
 export default class StudentList extends Component {
@@ -33,6 +32,7 @@ export default class StudentList extends Component {
         this.unsubscribe();
     }
 
+
     render() {
         const students = this.state.students;
         if (!students) return <div />
@@ -41,13 +41,14 @@ export default class StudentList extends Component {
                 <Container>
                     <Header as='h1'>
                         All Students
-                    <Modal trigger={<Button floated="right">Add Student</Button>}>
-                        <NewStudentForm />
-                    </Modal>
+                        <Button
+                            content="Add Student"
+                            floated="right"
+                        />
                     </Header>
                     <Divider />
                 </Container>
-                <Card.Group>
+                <Card.Group centered>
                     {students.map(student =>
                         <StudentThumb
                             key={student.id}
