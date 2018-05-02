@@ -8,37 +8,32 @@ import {
     Header,
 } from 'semantic-ui-react';
 
-import CampusThumb from '../index';
+import {CampusThumb} from '../index.js';
 
 const CampusList = (props) => {
     const campuses = props.campuses;
-    if (!campuses) return <h1>hello</h1>
+    if (!campuses) return (<div />)
     return (
         <Container text>
-            <Header as='h1'>
+            <Header as="h1">
                 All Campuses
-                    <Button
+                        <Button
                     content="Add Campus"
                     floated="right"
                 />
             </Header>
             <Divider />
             <Item.Group divided>
-                {/* {campuses.map(campus =>
+                {campuses.map(campus =>
                     <CampusThumb
                         key={campus.id}
                         campus={campus}
-                    />)} */}
+                    />)}
             </Item.Group>
         </Container>
     );
 }
 
-const mapStateToProps = (state) => {
-    console.log('state: ', state)
-    return {
-        campuses : state.campues
-    }
-}
+const mapStateToProps = ({campuses}) => ({campuses})
 
 export default connect(mapStateToProps)(CampusList);

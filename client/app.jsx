@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route }            from 'react-router-dom';
+import { Route, Switch }    from 'react-router-dom';
 import { connect }          from 'react-redux';
 
 import { fetchCampuses } from './redux/campuses';
@@ -16,7 +16,7 @@ class App extends Component {
 		this.props.fetchInitialData();
   }
   
-  render() {
+  render () {
     return (
       <div>
         <Navbar />
