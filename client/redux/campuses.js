@@ -19,7 +19,7 @@ const update = campus   => ({ type: UPDATE, campus });
  * REDUCER
  */
 const reducer = (campuses = [], action) => {
-    switch(action.type) {
+    switch (action.type) {
         case CREATE:
             return [action.campus, ...campuses];
         case INIT:
