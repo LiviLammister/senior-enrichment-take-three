@@ -1,3 +1,4 @@
+import axios from 'axios';
 /**
  * ACTION TYPES
  */
@@ -9,10 +10,10 @@ const UPDATE = 'UPDATE_CAMPUS';
 /**
  * ACTION CREATORS
  */
-const create = campus   => ({ type: CREATE_CAMPUS, campus });
-const init   = campuses => ({ type: INIT_CAMPUSES, campuses });
-const remove = id       => ({ type: REMOVE_CAMPUS, id });
-const update = campus   => ({ type: UPDATE_CAMPUS, campus });
+const create = campus   => ({ type: CREATE, campus });
+const init   = campuses => ({ type: INIT,   campuses });
+const remove = id       => ({ type: REMOVE, id });
+const update = campus   => ({ type: UPDATE, campus });
 
 /**
  * REDUCER
@@ -45,7 +46,9 @@ export const addCampus = (campus) => dispatch => {
 
 export const fetchCampuses = () => dispatch => {
     axios.get('/api/campuses')
-        .then(res => dispatch(init(res.data)))
+        .then(res => {
+            return dispatch(init(res.data))
+        })
         .catch(err => console.error('Fetching campuses unsuccessful', err));
 };
 
