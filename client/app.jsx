@@ -10,7 +10,8 @@ import {
   AddCampus,
   EditCampus,
   Navbar,
-  CampusList
+  CampusList,
+  StudentList,
 } from './components';
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
         <Route exact path="/campuses/"    component={CampusList} />
         <Route exact path="/campuses/add" component={AddCampus} />
         <Route exact path="/campuses/:id" component={EditCampus} />
+        <Route exact path="/students"     component={StudentList} />
         </Switch>
       </div>
     );
