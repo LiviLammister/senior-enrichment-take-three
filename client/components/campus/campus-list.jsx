@@ -17,7 +17,7 @@ const CampusList = (props) => {
         <Container text>
             <Header as="h1">
                 All Campuses
-                        <Button
+                <Button
                     content="Add Campus"
                     floated="right"
                 />
@@ -25,10 +25,7 @@ const CampusList = (props) => {
             <Divider />
             <Item.Group divided>
                 {campuses.map(campus =>
-                    <CampusThumb
-                        key={campus.id}
-                        campus={campus}
-                    />)}
+                    <CampusThumb key={campus.id} campus={campus} />)}
             </Item.Group>
         </Container>
     );
