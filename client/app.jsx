@@ -7,6 +7,7 @@ import { fetchStudents } from './redux/students';
  
 
 import {
+  AddCampus,
   EditCampus,
   Navbar,
   CampusList
@@ -21,8 +22,11 @@ class App extends Component {
     return (
       <div>
         <Navbar />
-        <Route exact path='/campuses/'    component={CampusList} />
-        <Route exact path='/campuses/:id' component={EditCampus} />
+        <Switch>
+        <Route exact path="/campuses/"    component={CampusList} />
+        <Route exact path="/campuses/add" component={AddCampus} />
+        <Route exact path="/campuses/:id" component={EditCampus} />
+        </Switch>
       </div>
     );
   }

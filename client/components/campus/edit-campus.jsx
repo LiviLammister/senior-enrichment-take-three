@@ -1,11 +1,18 @@
 import _                    from 'lodash';
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
+
+import {
+    Control,
+    Form as ReactReduxForm,
+    actions
+} from 'react-redux-form';
+
 import {
     Card,
     Container,
     Divider,
-    Form,
+    Form as SemanticForm,
     Header,
 } from 'semantic-ui-react';
 
@@ -54,13 +61,11 @@ class Campus extends Component {
 
     render() {
         const campus = this.state.campus;
-        const students = this.state.students
-        console.log('state: ', this.state)
-        console.log('props: ', this.props)
+        const students = this.state.students;
         if (!campus) return <div />
         if (!students) return <div />
         return (
-            <div>          
+            <div>
                 <Container text>
                     <Header
                         as='h1'
@@ -68,34 +73,13 @@ class Campus extends Component {
                         textAlign="center"
                     />
                     <Divider />
-                    <Form>
-                        <Form.Group widths="equal">
-                            <Form.Input
-                                label="Name"
-                                name="name"
-                                onChange={evt => this.onCampusUpdate({ name: evt.target.value })}
-                                placeholder="Name"
-                                value={campus.name}
-                            />
-                            <Form.Input
-                                label="Image URL"
-                                name="imageUrl"
-                                onChange={evt => this.onCampusUpdate({ imageUrl: evt.target.value })}
-                                placeholder="URL"
-                                value={campus.imageUrl}
-                            />
-                        </Form.Group>
-                        <Form.Group widths="equal">
-                            <Form.Input
-                                label="Description"
-                                name="description"
-                                onChange={evt => this.onCampusUpdate({ description: evt.target.value })}
-                                placeholder="URL"
-                                value={campus.description}
-                            />
-                        </Form.Group>
-                        <Form.Button content='Submit' />
-                    </Form>
+                    <ReactReduxForm
+                        model="campus"
+                        onSubmit={(campus) => this.handleSubmit(campus)}
+                    >
+                        <label htmlFor="campus.name">Name:</label>
+                        
+                    </ReactReduxForm>
                     <Divider />
                     
                 </Container>
@@ -116,8 +100,8 @@ class Campus extends Component {
 const mapStateToProps = ({campuses, students}, ownProps) => {
     const paramId = Number(ownProps.match.params.id);
     return {
-        campus   : campuses.find(campus => campus.id === paramId),
-        students : students.filter(student => student.campusId === paramId)
+        campus: campuses.find(campus => campus.id === paramId),
+        students: students.filter(student => student.campusId === paramId)
     }
 }
 

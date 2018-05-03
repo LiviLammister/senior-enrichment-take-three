@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
+import { Link }             from 'react-router-dom';
 import {
     Button,
     Container,
@@ -18,6 +19,7 @@ const CampusList = (props) => {
             <Header as="h1">
                 All Campuses
                 <Button
+                    as={Link} to="/campuses/add"
                     content="Add Campus"
                     floated="right"
                 />
