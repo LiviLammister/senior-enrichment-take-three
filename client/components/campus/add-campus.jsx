@@ -53,7 +53,10 @@ class AddCampus extends Component {
                         />
                     </Form.Group>
                     <Form.Group inline>
-                        <Form.Field control={Button} content="Confirm" />
+                        <Form.Field
+                            control={Button}
+                            content="Confirm"
+                        />
                     </Form.Group>
                 </Form>
             </Container>

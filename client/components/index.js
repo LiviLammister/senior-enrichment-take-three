@@ -9,3 +9,4 @@ export {default as StudentList}  from './student/student-list.jsx';
 export {default as StudentThumb} from './student/student-thumb.jsx';
 
 export {default as Navbar} from './navbar.jsx';
+export {default as Home}   from './home.jsx'

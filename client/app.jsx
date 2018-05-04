@@ -11,6 +11,7 @@ import {
   AddStudent,
   EditCampus,
   EditStudent,
+  Home,
   Navbar,
   CampusList,
   StudentList,
@@ -25,11 +26,12 @@ class App extends Component {
     return (
       <div>
         <Navbar />
-        <Route exact path="/campuses/"    component={CampusList} />
-        <Route exact path="/campuses/add" component={AddCampus} />
-        <Route exact path="/campuses/:id" component={EditCampus} />
+        <Route exact path="/"             component={Home}        />
+        <Route exact path="/campuses/"    component={CampusList}  />
+        <Route exact path="/campuses/add" component={AddCampus}   />
+        <Route exact path="/campuses/:id" component={EditCampus}  />
         <Route exact path="/students"     component={StudentList} />
-        <Route exact path="/students/add" component={AddStudent} />
+        <Route exact path="/students/add" component={AddStudent}  />
         <Route exact path="/students/:id" component={EditStudent} />
       </div>
     );
