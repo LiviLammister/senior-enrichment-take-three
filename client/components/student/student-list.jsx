@@ -1,5 +1,6 @@
-import axios                from 'axios';
-import React, { Component } from 'react';
+import React       from 'react';
+import { connect } from 'react-redux';
+import { Link }    from 'react-router-dom';
 import {
     Button,
     Container,
@@ -12,36 +13,17 @@ import {
     StudentThumb,
 } from '../index';
 
-import store, { getStudents } from '../store';
 
-export default class StudentList extends Component {
-
-    constructor() {
-        super();
-        this.state = store.getState();
-    }
-
-    componentDidMount() {
-        this.unsubscribe = store.subscribe(() => { this.setState(store.getState()) });
-        axios.get('/api/students')
-            .then(res => res.data)
-            .then(students => { store.dispatch(getStudents(students)) });
-    }
-
-    componentWillUnmount() {
-        this.unsubscribe();
-    }
-
-
-    render() {
-        const students = this.state.students;
+const StudentList = (props) => {
+        const students = props.students;
         if (!students) return <div />
         return (
             <div>
                 <Container>
-                    <Header as='h1'>
+                    <Header as="h1">
                         All Students
                         <Button
+                            as={Link} to="/students/add"
                             content="Add Student"
                             floated="right"
                         />
@@ -50,12 +32,14 @@ export default class StudentList extends Component {
                 </Container>
                 <Card.Group centered>
                     {students.map(student =>
-                        <StudentThumb
+                        (<StudentThumb
                             key={student.id}
                             student={student}
-                        />)}
+                        />))}
                 </Card.Group>
             </div>
         );
     }
-}
+
+const mapStateToProps = ({students}) => ({students});
+export default connect(mapStateToProps)(StudentList);

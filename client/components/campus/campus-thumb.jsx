@@ -1,8 +1,6 @@
 import React    from 'react';
 import { Link } from 'react-router-dom';
-import {
-    Item,
-} from 'semantic-ui-react';
+import { Item } from 'semantic-ui-react';
 
 const CampusThumb = (props) => {
     const campus = props.campus;

@@ -25,7 +25,7 @@ const Student = db.define('student', {
     },
     imageUrl: {
         type: Sequelize.STRING,
-        defaultValue: './images/image-not-found.png'
+        defaultValue: '/img/image-not-found.png',
     },
     email: {
         type: Sequelize.STRING,

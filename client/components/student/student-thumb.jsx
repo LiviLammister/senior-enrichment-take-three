@@ -9,13 +9,16 @@ const StudentThumb = (props) => {
     const student = props.student;
     return (
         <Card>
-            <Image src={student.imageUrl} />
+            <Image
+                as={Link} to={`/students/${student.id}`}
+                src={student.imageUrl}
+            />
             <Card.Content>
                 <Card.Header>
                     {student.fullName}
                 </Card.Header>
                 <Card.Meta>
-                    <span className='date'>
+                    <span className="date">
                         GPA: {student.gpa}
                     </span>
                 </Card.Meta>

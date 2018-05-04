@@ -12,36 +12,35 @@ router.param('id', (req, res, next, id) => {
       })
       .catch(next);
   });
-  
+
   router.get('/', (req, res, next) => {
     Campus.findAll()
       .then(campuses => res.json(campuses))
       .catch(next);
   });
-  
+
   router.post('/', (req, res, next) => {
     Campus.create(req.body)
       .then(campus => res.status(201).json(campus))
       .catch(next);
   });
-  
+
   router.get('/:id', (req, res, next) => {
     Campus.findById(req.params.id)
       .then(campus => res.json(campus))
       .catch(next);
   });
-  
+
   router.put('/:id', (req, res, next) => {
     req.requestedCampus.update(req.body)
-      .then(campus => res.json(capmus))
+      .then(campus => res.json(campus))
       .catch(next);
   });
-  
+
   router.delete('/:id', (req, res, next) => {
     req.requestedCampus.destroy()
       .then(() => res.sendStatus(204))
       .catch(next);
   });
-  
+
   module.exports = router;
-  
