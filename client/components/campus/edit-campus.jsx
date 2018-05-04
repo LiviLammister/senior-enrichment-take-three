@@ -1,95 +1,95 @@
-import _                    from 'lodash';
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
-
 import {
-    Control,
-    Form as ReactReduxForm,
-    actions
-} from 'react-redux-form';
-
-import {
+    Button,
     Card,
     Container,
     Divider,
-    Form as SemanticForm,
+    Form,
     Header,
+    Input,
+    TextArea,
 } from 'semantic-ui-react';
 
-import {
-    StudentThumb,
-} from '../index';
-
-import { updateCampus } from '../../redux/campuses';
+import { StudentThumb } from '../index';
+import { updateCampus } from '../../redux/campuses'
 
 class Campus extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            campus: props.campus,
-            students: props.students,
-        }
+        this.state = {};
     }
 
-    componentWillReceiveProps(newProps, oldProps) {
-        if (newProps.campus !== oldProps.campus) {
-            this.setState({
-                campus: newProps.campus,
-            });
-        }
-        if (newProps.students !== oldProps.students) {
-            this.setState({
-                students: newProps.students,
-            });
-        }
+    componentDidMount = () => {
+        this.setState(this.props.currentCampus);
     }
 
-    onCampusUpdate(campusUpdateObj) {
-        const { debouncedUpdateCampus } = this.props;
-        const { campus } = this.state;
-        this.setState({
-            campus: Object.assign(campus, campusUpdateObj)
-        });
-        debouncedUpdateCampus(campus.id, campusUpdateObj);
+    handleChange = (evt, { name, value }) => {
+        console.log('current campus', this.props.currentCampus)
+        this.setState({ [name]: value });
     }
-    
-    handleSubmit = (event) => {
-        event.preventDefault()
-        console.log('SUBMITTED!');
+
+    handleSubmit = () => {
+        this.props.updateCampus(this.props.currentCampus.id, this.state)
     }
 
     render() {
-        const campus = this.state.campus;
-        const students = this.state.students;
-        if (!campus) return <div />
-        if (!students) return <div />
+        const currentCampus = this.props.currentCampus;
+        //const students = this.props.students;
+        const studentsOnCampus = this.props.studentsOnCampus;
+        if (!currentCampus) return <div />
+        if (!studentsOnCampus) return <div />
         return (
             <div>
                 <Container text>
                     <Header
-                        as='h1'
+                        as="h1"
                         content="Edit Campus"
                         textAlign="center"
                     />
                     <Divider />
-                    <ReactReduxForm
-                        model="campus"
-                        onSubmit={(campus) => this.handleSubmit(campus)}
-                    >
-                        <label htmlFor="campus.name">Name:</label>
-                        
-                    </ReactReduxForm>
-                    <Divider />
-                    
+                    <Form onSubmit={this.handleSubmit}>
+                        <Form.Group>
+                            <Form.Field
+                                control={Input}
+                                label="Name"
+                                placeholder={currentCampus.name}
+                                name="name"
+                                value={this.state.name}
+                                onChange={this.handleChange}
+                            />
+                            <Form.Field
+                                control={Input}
+                                label="Image URL"
+                                placeholder={currentCampus.imageUrl}
+                                name="imageUrl"
+                                value={this.state.imageUrl}
+                                onChange={this.handleChange}
+                            />
+                        </Form.Group>
+                        <Form.Field
+                            control={TextArea}
+                            label="Description"
+                            placeholder={currentCampus.description}
+                            name="description"
+                            value={this.state.description}
+                            onChange={this.handleChange} />
+                        <Form.Group inline>
+                            <Form.Field
+                                control={Button}
+                                content="Confirm"
+                            />
+                        </Form.Group>
+                    </Form>
                 </Container>
                 <Header
-                    as='h2'
+                    as="h2"
                     content="Students on Campus"
                     textAlign="center"
                 />
                 <Card.Group centered>
-                    {this.state.students.map(student =>
+                    {studentsOnCampus.map(student =>
                         <StudentThumb key={student.id} student={student} />)}
                 </Card.Group>
             </div>
@@ -100,15 +100,12 @@ class Campus extends Component {
 const mapStateToProps = ({campuses, students}, ownProps) => {
     const paramId = Number(ownProps.match.params.id);
     return {
-        campus: campuses.find(campus => campus.id === paramId),
-        students: students.filter(student => student.campusId === paramId)
+        currentCampus: campuses.find(campus => campus.id === paramId),
+        studentsOnCampus: students.filter(student => student.campusId === paramId),
+        students,
     }
 }
 
-const mapDispatch = (dispatch, ownProps) => ({
-    debouncedUpdateCampus: _.debounce((...args) => {
-      dispatch(updateCampus(...args));
-    }, 500)
-  });
+const mapDispatch = { updateCampus };
 
 export default connect(mapStateToProps, mapDispatch)(Campus);

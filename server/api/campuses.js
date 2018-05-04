@@ -33,7 +33,7 @@ router.param('id', (req, res, next, id) => {
   
   router.put('/:id', (req, res, next) => {
     req.requestedCampus.update(req.body)
-      .then(campus => res.json(capmus))
+      .then(campus => res.json(campus))
       .catch(next);
   });
   

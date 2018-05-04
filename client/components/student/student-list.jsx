@@ -20,7 +20,7 @@ const StudentList = (props) => {
         return (
             <div>
                 <Container>
-                    <Header as='h1'>
+                    <Header as="h1">
                         All Students
                         <Button
                             as={Link} to="/students/add"
@@ -32,14 +32,14 @@ const StudentList = (props) => {
                 </Container>
                 <Card.Group centered>
                     {students.map(student =>
-                        <StudentThumb
+                        (<StudentThumb
                             key={student.id}
                             student={student}
-                        />)}
+                        />))}
                 </Card.Group>
             </div>
         );
     }
 
 const mapStateToProps = ({students}) => ({students});
-export default connect(mapStateToProps)(StudentList)
+export default connect(mapStateToProps)(StudentList);
