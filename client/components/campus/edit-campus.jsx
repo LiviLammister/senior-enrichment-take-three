@@ -14,7 +14,7 @@ import {
 import { StudentThumb } from '../index';
 import { updateCampus } from '../../redux/campuses'
 
-class Campus extends Component {
+class EditCampus extends Component {
 
     constructor(props) {
         super(props);
@@ -26,7 +26,6 @@ class Campus extends Component {
     }
 
     handleChange = (evt, { name, value }) => {
-        console.log('current campus', this.props.currentCampus)
         this.setState({ [name]: value });
     }
 
@@ -108,4 +107,4 @@ const mapStateToProps = ({campuses, students}, ownProps) => {
 
 const mapDispatch = { updateCampus };
 
-export default connect(mapStateToProps, mapDispatch)(Campus);
+export default connect(mapStateToProps, mapDispatch)(EditCampus);
